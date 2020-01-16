@@ -1,0 +1,24 @@
+{
+  "name": "maker-7zip-sfx",
+  "version": "6.0.0-beta.47",
+  "description": "7Zip-SFX maker for Electron Forge",
+  "author": "Matteo Tomasoni",
+  "license": "MIT",
+  "main": "dist/Maker7ZipSfx.js",
+  "typings": "dist/Maker7ZipSfx.d.ts",
+  "devDependencies": {
+    "chai": "4.2.0",
+    "mocha": "^6.2.2"
+  },
+  "engines": {
+    "node": ">= 8.0"
+  },
+  "dependencies": {
+    "7zip-bin": "^5.0.3",
+    "@electron-forge/maker-base": "6.0.0-beta.47",
+    "@electron-forge/shared-types": "6.0.0-beta.47",
+    "fs-extra": "^8.1.0",
+    "node-7z": "^2.0.5",
+    "path": "^0.12.7"
+  }
+}
