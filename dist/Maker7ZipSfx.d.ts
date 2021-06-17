@@ -1,6 +1,9 @@
 import MakerBase, { MakerOptions } from '@electron-forge/maker-base';
 import { ForgePlatform } from '@electron-forge/shared-types';
-export declare type Maker7ZipSfxConfig = {};
+export declare type Maker7ZipSfxConfig = {
+    resources: any;
+    compressionLevel: number;
+};
 export default class Maker7ZipSfx extends MakerBase<Maker7ZipSfxConfig> {
     name: string;
     defaultPlatforms: ForgePlatform[];
