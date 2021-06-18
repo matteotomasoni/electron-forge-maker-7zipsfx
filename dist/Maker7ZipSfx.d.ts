@@ -4,7 +4,8 @@ import * as signtool from 'signtool';
 export declare type Maker7ZipSfxConfig = {
     resources: any;
     compressionLevel: number;
-    signOptions: signtool.SignOptions | false;
+    signOptions: signtool.SignOptions | undefined;
+    signIncludedExecutables: boolean;
 };
 export default class Maker7ZipSfx extends MakerBase<Maker7ZipSfxConfig> {
     name: string;

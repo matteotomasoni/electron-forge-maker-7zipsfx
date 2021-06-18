@@ -8,11 +8,13 @@ import rcedit from 'rcedit';
 import Seven from 'node-7z';
 import sevenBin from '7zip-bin';
 import * as signtool from 'signtool';
+import readdirp from 'readdirp';
 
 export type Maker7ZipSfxConfig = {
   resources:any,
   compressionLevel:number,
-  signOptions:signtool.SignOptions|false,
+  signOptions:signtool.SignOptions|undefined,
+  signIncludedExecutables:boolean,
 };
 
 
@@ -76,11 +78,30 @@ export default class Maker7ZipSfx extends MakerBase<Maker7ZipSfxConfig> {
 
     fs.copyFileSync(originalSfxPath, sfxTempPath);
 
+    // Sign all the included executables
+    if(typeof this.config.signOptions !== 'undefined' && this.config.signIncludedExecutables === true) {
+      const readdirpOptions = {
+        fileFilter: ["*.exe", "*.dll"],
+        depth: 10,
+      }
+      const files = await readdirp.promise(dir, readdirpOptions)
+      for await (const item of files) {
+        // If the verify fails, we sign the file
+        try{
+          await signtool.verify(item.fullPath, {defaultAuthPolicy:true})
+        }
+        catch(err) {
+          await signtool.sign(item.fullPath, this.config.signOptions)
+        }
+      }
+    }
+
     await rcedit(sfxTempPath, rceditConfig);
 
     await create7ZipSfx(outputExePath, dir + path.sep + '*', sfxTempPath, this.config.compressionLevel);
 
-    if(this.config.hasOwnProperty('signOptions') && this.config.signOptions !== false) {
+    // Sign the output executable
+    if(typeof this.config.signOptions !== 'undefined') {
       await signtool.sign(outputExePath, this.config.signOptions)
     }
 
