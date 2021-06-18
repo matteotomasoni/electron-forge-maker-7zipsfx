@@ -19,6 +19,7 @@
     "@electron-forge/shared-types": "6.0.0-beta.54",
     "fs-extra": "^8.1.0",
     "node-7z": "^2.1.1",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "signtool": "^1.0.0"
   }
 }

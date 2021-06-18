@@ -1,4 +1,23 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -19,6 +38,7 @@ const rcedit_1 = __importDefault(require("rcedit"));
 // @ts-ignore
 const node_7z_1 = __importDefault(require("node-7z"));
 const _7zip_bin_1 = __importDefault(require("7zip-bin"));
+const signtool = __importStar(require("signtool"));
 function create7ZipSfx(archivePath, sources, sfxImagePath, compressionLevel = 5) {
     return new Promise(function (resolve, reject) {
         let stream = node_7z_1.default.add(archivePath, sources, {
@@ -63,6 +83,9 @@ class Maker7ZipSfx extends maker_base_1.default {
             fs_1.default.copyFileSync(originalSfxPath, sfxTempPath);
             yield rcedit_1.default(sfxTempPath, rceditConfig);
             yield create7ZipSfx(outputExePath, dir + path_1.default.sep + '*', sfxTempPath, this.config.compressionLevel);
+            if (this.config.hasOwnProperty('signOptions') && this.config.signOptions !== false) {
+                yield signtool.sign(outputExePath, this.config.signOptions);
+            }
             return [outputExePath];
         });
     }

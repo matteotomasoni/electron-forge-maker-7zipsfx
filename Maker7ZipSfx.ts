@@ -7,11 +7,14 @@ import rcedit from 'rcedit';
 // @ts-ignore
 import Seven from 'node-7z';
 import sevenBin from '7zip-bin';
+import * as signtool from 'signtool';
 
 export type Maker7ZipSfxConfig = {
   resources:any,
   compressionLevel:number,
+  signOptions:signtool.SignOptions|false,
 };
+
 
 function create7ZipSfx(archivePath:string, sources:string, sfxImagePath:string, compressionLevel:number = 5) {
   return new Promise(function(resolve, reject) {
@@ -76,6 +79,10 @@ export default class Maker7ZipSfx extends MakerBase<Maker7ZipSfxConfig> {
     await rcedit(sfxTempPath, rceditConfig);
 
     await create7ZipSfx(outputExePath, dir + path.sep + '*', sfxTempPath, this.config.compressionLevel);
+
+    if(this.config.hasOwnProperty('signOptions') && this.config.signOptions !== false) {
+      await signtool.sign(outputExePath, this.config.signOptions)
+    }
 
     return [outputExePath];
   }

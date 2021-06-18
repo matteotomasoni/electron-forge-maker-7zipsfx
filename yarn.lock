@@ -2403,6 +2403,11 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.3.tgz#a1410c2edd8f077b08b4e253c8eacfcaf057461c"
   integrity sha512-VUJ49FC8U1OxwZLxIbTTrDvLnf/6TDgxZcK8wxR8zs13xpx7xbG60ndBlhNrFi2EMuFRoeDoJO7wthSLq42EjA==
 
+signtool@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/signtool/-/signtool-1.0.0.tgz#a807636db3dc1e1a12dc76d5fbf03d1a49ae2453"
+  integrity sha1-qAdjbbPcHhoS3HbV+/A9GkmuJFM=
+
 spdx-correct@^3.0.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/spdx-correct/-/spdx-correct-3.1.1.tgz#dece81ac9c1e6713e5f7d1b6f17d468fa53d89a9"
