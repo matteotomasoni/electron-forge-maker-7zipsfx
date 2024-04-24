@@ -1,6 +1,6 @@
 {
   "name": "electron-forge-maker-7zipsfx",
-  "version": "6.4.0",
+  "version": "7.4.0",
   "description": "7Zip-SFX maker for Electron Forge",
   "author": "Matteo Tomasoni",
   "license": "MIT",
@@ -12,14 +12,14 @@
     "sinon": "^13.0.1"
   },
   "engines": {
-    "node": ">= 14.17.5"
+    "node": ">= 16.4.0"
   },
   "dependencies": {
     "7zip-bin": "^5.2.0",
-    "@electron-forge/maker-base": "6.4.0",
-    "@electron-forge/shared-types": "6.4.0",
+    "@electron-forge/maker-base": "7.4.0",
+    "@electron-forge/shared-types": "7.4.0",
     "fs-extra": "^10.0.0",
-    "node-7z": "^2.1.1",
+    "node-7z": "^2.1.2",
     "path": "^0.12.7",
     "readdirp": "^3.6.0",
     "signtool": "^1.0.0"
