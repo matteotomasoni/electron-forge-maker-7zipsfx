@@ -9,6 +9,8 @@
   "devDependencies": {
     "chai": "^4.3.3",
     "mocha": "^9.0.1",
+    "rcedit": "^4.0.1",
+    "rxjs": "^7.8.1",
     "sinon": "^13.0.1"
   },
   "engines": {
