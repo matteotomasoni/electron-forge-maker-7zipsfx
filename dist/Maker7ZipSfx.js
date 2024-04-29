@@ -38,7 +38,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Maker7ZipSfx = void 0;
 const maker_base_1 = __importDefault(require("@electron-forge/maker-base"));
 const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
@@ -129,5 +128,4 @@ class Maker7ZipSfx extends maker_base_1.default {
     }
 }
 exports.default = Maker7ZipSfx;
-exports.Maker7ZipSfx = Maker7ZipSfx;
 //# sourceMappingURL=Maker7ZipSfx.js.map
