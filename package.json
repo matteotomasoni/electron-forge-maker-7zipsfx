@@ -9,8 +9,6 @@
   "devDependencies": {
     "chai": "^4.3.3",
     "mocha": "^9.0.1",
-    "rcedit": "^4.0.1",
-    "rxjs": "^7.8.1",
     "sinon": "^13.0.1"
   },
   "engines": {
@@ -23,7 +21,9 @@
     "fs-extra": "^10.0.0",
     "node-7z": "^2.1.2",
     "path": "^0.12.7",
+    "rcedit": "^4.0.1",
     "readdirp": "^3.6.0",
+    "rxjs": "^7.8.1",
     "signtool": "^1.0.0"
   },
   "files": [

@@ -10,7 +10,7 @@ import sevenBin from '7zip-bin';
 import * as signtool from 'signtool';
 import readdirp from 'readdirp';
 
-export type Maker7ZipSfxConfig = {
+type Maker7ZipSfxConfig = {
   resources:any,
   compressionLevel:number,
   signOptions:signtool.SignOptions|undefined,
@@ -108,3 +108,5 @@ export default class Maker7ZipSfx extends MakerBase<Maker7ZipSfxConfig> {
     return [outputExePath];
   }
 }
+
+export { Maker7ZipSfx, Maker7ZipSfxConfig };
