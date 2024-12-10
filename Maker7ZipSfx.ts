@@ -8,7 +8,7 @@ import rcedit from 'rcedit';
 import Seven from 'node-7z';
 import sevenBin from '7zip-bin';
 import * as signtool from 'signtool';
-import readdirp from 'readdirp';
+import { readdirpPromise, ReaddirpOptions } from 'readdirp';
 
 type Maker7ZipSfxConfig = {
   resources:any,
@@ -80,18 +80,18 @@ export default class Maker7ZipSfx extends MakerBase<Maker7ZipSfxConfig> {
 
     // Sign all the included executables
     if(typeof this.config.signOptions !== 'undefined' && this.config.signIncludedExecutables === true) {
-      const readdirpOptions = {
-        fileFilter: ["*.exe", "*.dll"],
+      const readdirpOptions:Partial<ReaddirpOptions> = {
+        fileFilter: (_path) => _path.basename.endsWith(".exe") || _path.basename.endsWith(".dll"),
         depth: 10,
       }
-      const files = await readdirp.promise(dir, readdirpOptions)
+      const files = await readdirpPromise(dir, readdirpOptions)
       for await (const item of files) {
         // If the verify fails, we sign the file
         try{
-          await signtool.verify(item.fullPath, {defaultAuthPolicy:true})
+          await signtool.verify(item, {defaultAuthPolicy:true})
         }
         catch(err) {
-          await signtool.sign(item.fullPath, this.config.signOptions)
+          await signtool.sign(item, this.config.signOptions)
         }
       }
     }
